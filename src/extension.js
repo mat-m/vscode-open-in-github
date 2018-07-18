@@ -1,21 +1,23 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 
-var VsCode = require('vscode');
-var Window = VsCode.window;
-var commands = VsCode.commands;
-var workspace = VsCode.workspace;
-var Position = VsCode.Position;
-
-var path = require('path');
-var fs = require('fs');
-var open = require('open');
-var copy = require('copy-paste').copy;
-var gitRev = require('git-rev-2');
-var findParentDir = require('find-parent-dir');
-var ini = require('ini');
+const VsCode = require('vscode');
+const clipboardy = require('clipboardy');
+const path = require('path');
+const fs = require('fs');
+const open = require('open');
+const gitRev = require('git-rev-2');
+const findParentDir = require('find-parent-dir');
+const ini = require('ini');
 
 const gitProvider = require('./gitProvider');
+
+const Window = VsCode.window;
+const commands = VsCode.commands;
+const workspace = VsCode.workspace;
+const Position = VsCode.Position;
+
+const copy = clipboardy.writeSync;
 const requireSelectionForLines = workspace.getConfiguration('openInGitHub').get('requireSelectionForLines');
 
 function getGitProviderLink(cb, fileFsPath, lines, pr) {
